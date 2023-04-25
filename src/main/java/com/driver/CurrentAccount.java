@@ -64,30 +64,55 @@ public class CurrentAccount extends BankAccount{
             return "";
         }
 
-        int index = 0;
-        char[]res = new char[n];
-        for(index=0;index<n;index=index+2){
-            if(count[maxCount]>0){
-                res[index] = ch_max;
-                count[maxCount]--;
-            }else{
-                break;
-            }
+//        int index = 0;
+//        char[]res = new char[n];
+//        for(index=0;index<n;index=index+2){
+//            if(count[maxCount]>0){
+//                res[index] = ch_max;
+//                count[maxCount]--;
+//            }else{
+//                break;
+//            }
+//        }
+//
+//        for(int i=0;i<26;i++){
+//            char ch = (char)('A' + i);
+//            while(count[i] > 0){
+//                if(index>n){
+//                    index = 1;
+//                }
+//                res[index] = ch;
+//                index = index + 2;
+//                count[i]--;
+//            }
+//        }
+//        String ans = valueOf(res);
+//        return ans;
+
+        String res = "";
+        for (int i = 0; i < n; i++) {
+            res += ' ';
         }
 
-        for(int i=0;i<26;i++){
-            char ch = (char)('A' + i);
-            while(count[i] > 0){
-                if(index>n){
-                    index = 1;
-                }
-                res[index] = ch;
-                index = index + 2;
+        int ind = 0;
+        while (maxCount > 0) {
+            res = res.substring(0, ind) + ch_max
+                    + res.substring(ind + 1);
+            ind = ind + 2;
+            maxCount--;
+        }
+        count[(int) ch_max - (int) 'A'] = 0;
+        for (int i = 0; i < 26; i++) {
+            while (count[i] > 0) {
+                ind = (ind >= n) ? 1 : ind;
+                res = res.substring(0, ind)
+                        + (char) ((int) 'A' + i)
+                        + res.substring(ind + 1);
+                ind += 2;
                 count[i]--;
             }
         }
-        String ans = valueOf(res);
-        return ans;
+        return res;
     }
 
 
